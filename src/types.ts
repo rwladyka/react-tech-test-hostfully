@@ -10,7 +10,7 @@ export type Place = {
 export type Booking = {
   id?: number
   name: string
-  startDate: string
-  endDate: string
+  checkin: string
+  checkout: string
   placeId: number
 }

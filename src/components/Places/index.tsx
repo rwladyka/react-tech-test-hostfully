@@ -1,40 +1,25 @@
-import { Card, Flex, Image, Typography } from 'antd'
-import Meta from 'antd/es/card/Meta'
+import { Flex, Typography } from 'antd'
 import { Place } from '../../types'
 import Title from 'antd/es/typography/Title'
 import theme from '../../config/defaultSettings'
+import PlaceCard from './PlaceCard'
 
 type PlacesProps = {
   places: Place[]
+  onSelect: (place: Place) => void
 }
 
-const Places = ({ places }: PlacesProps) => {
+const Places = ({ places, onSelect }: PlacesProps) => {
   return (
     <>
       <Typography>
-        <Title level={2} style={{ color: theme.colorPrimary }}>
+        <Title level={2} style={{ color: theme.colorPrimary, margin: '16px' }}>
           Choose a Place
         </Title>
       </Typography>
       <Flex gap='middle' justify='center' wrap='wrap'>
         {places.map((place) => (
-          <Card
-            key={place.id}
-            hoverable
-            style={{ width: 240 }}
-            cover={
-              <Image
-                alt={place.shortDescription}
-                src={place.image}
-                style={{ maxHeight: 160 }}
-                preview={false}
-              />
-            }
-            onClick={() => alert('clicked!')}
-          >
-            {place.id}
-            <Meta title={place.name} description={place.city} />
-          </Card>
+          <PlaceCard place={place} onSelect={onSelect} />
         ))}
       </Flex>
     </>

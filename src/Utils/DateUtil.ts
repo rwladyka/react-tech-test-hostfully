@@ -12,3 +12,6 @@ export const decodeDate = (date?: string) => {
 
   return dayjs(date, DATE_FORMAT)
 }
+
+export const isDateBetween = (date: string, startDate: string, endDate: string) =>
+  dayjs(date).isBetween(startDate, endDate, 'day', '[]')

@@ -6,13 +6,12 @@ type DateFilterProps = {
 
 const DateFilter = ({ onFilter }: DateFilterProps) => {
   return (
-    <Flex gap='middle' justify='center'>
+    <Flex justify='center' style={{ padding: '8px 0' }}>
       <DatePicker.RangePicker
         placeholder={['Check in', 'Check out']}
         disabledDate={(currentDate) => currentDate.isBefore(Date.now())}
         onChange={(_, [startDate, endDate]) => onFilter(startDate, endDate)}
         format='MM/DD/YYYY'
-        bordered={false}
         allowClear
         showTime
       />
