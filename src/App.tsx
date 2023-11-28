@@ -1,7 +1,11 @@
+import places from './assets/places.json';
+import Places from './components/Places';
+import { Place } from './types';
+
 function App() {
   return (
     <>
-      <h1>Vite + React</h1>
+      <Places places={places as Place[]} />
     </>
   );
 }

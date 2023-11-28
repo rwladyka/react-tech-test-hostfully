@@ -1,0 +1,34 @@
+[
+  {
+    "id": 1,
+    "name": "Wonderful Chalet",
+    "shortDescription": "Reconnect with nature in this unforgettable mountain chalet with wonderful views and access to the Capivari dam.",
+    "image": "https://a0.muscache.com/im/pictures/8096fcd0-5e6c-480c-9e1d-e70f45b2c635.jpg",
+    "value": 630,
+    "city": "Campina Grande, Brazil"
+  },
+  {
+    "id": 2,
+    "name": "Sustainable Cabin",
+    "shortDescription": "Located in the middle of the Atlantic forest at the top of a mountain, which provides an incredible experience with a view of a set of mountains.",
+    "image": "https://a0.muscache.com/im/pictures/7bad879e-3022-4dac-8117-a5ab5d416b1e.jpg",
+    "price": 830,
+    "city": "Balneário Camboriú, Brazil"
+  },
+  {
+    "id": 3,
+    "name": "Breathtaking View",
+    "shortDescription": "The place has a breathtaking view of the entire beachfront of Balneário Camboriú.",
+    "image": "https://a0.muscache.com/im/pictures/4227633c-20e6-409a-afda-70aab275dfba.jpg",
+    "price": 650,
+    "city": "Pioneiros, Brazil"
+  },
+  {
+    "id": 4,
+    "name": "Front of Paradise",
+    "shortDescription": "This place has a strategic location: in front of the beaches of Maracaipe.",
+    "image": "https://a0.muscache.com/im/pictures/9fad132f-f272-4468-abec-55fc49c28f1a.jpg",
+    "price": 220,
+    "city": "Ipojuca, Brazil"
+  }
+]
