@@ -1,12 +1,12 @@
-import { Card, Flex, Image, Typography } from 'antd';
-import Meta from 'antd/es/card/Meta';
-import { Place } from '../../types';
-import Title from 'antd/es/typography/Title';
-import theme from '../../config/defaultSettings';
+import { Card, Flex, Image, Typography } from 'antd'
+import Meta from 'antd/es/card/Meta'
+import { Place } from '../../types'
+import Title from 'antd/es/typography/Title'
+import theme from '../../config/defaultSettings'
 
 type PlacesProps = {
-  places: Place[];
-};
+  places: Place[]
+}
 
 const Places = ({ places }: PlacesProps) => {
   return (
@@ -16,7 +16,7 @@ const Places = ({ places }: PlacesProps) => {
           Choose a Place
         </Title>
       </Typography>
-      <Flex gap="middle" justify="center" wrap="wrap">
+      <Flex gap='middle' justify='center' wrap='wrap'>
         {places.map((place) => (
           <Card
             key={place.id}
@@ -32,12 +32,13 @@ const Places = ({ places }: PlacesProps) => {
             }
             onClick={() => alert('clicked!')}
           >
+            {place.id}
             <Meta title={place.name} description={place.city} />
           </Card>
         ))}
       </Flex>
     </>
-  );
-};
+  )
+}
 
-export default Places;
+export default Places
