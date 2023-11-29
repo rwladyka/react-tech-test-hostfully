@@ -5,6 +5,8 @@ import { DeleteOutlined, EditOutlined } from '@ant-design/icons'
 import { useDispatch } from 'react-redux'
 import { deleteBooking, editBooking } from '../../slicers/bookingSlicer'
 import { getPlaceById } from '../../Utils/PlacesUtil'
+import { daysDiff } from '../../Utils/DateUtil'
+import { formatCurrency } from '../../Utils/CurrencyUtil'
 
 type BookingsTableProps = {
   bookings: Booking[]
@@ -47,6 +49,19 @@ const BookingsTable = ({ bookings }: BookingsTableProps) => {
       title: 'Checkout',
       dataIndex: 'checkout',
       key: 'checkout',
+    },
+    {
+      title: 'Total',
+      key: 'total',
+      render: (data) => {
+        return (
+          <>
+            {formatCurrency(
+              getPlaceById(data.placeId)?.price * daysDiff(data.checkin, data.checkout),
+            )}
+          </>
+        )
+      },
     },
     {
       title: 'Action',
