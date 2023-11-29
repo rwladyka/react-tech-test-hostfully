@@ -1,5 +1,6 @@
 import dayjs, { Dayjs } from 'dayjs'
 import isBetween from 'dayjs/plugin/isBetween'
+import { Booking } from '../types'
 
 dayjs.extend(isBetween)
 
@@ -13,8 +14,17 @@ export const decodeDate = (date?: string) => {
   return dayjs(date, DATE_FORMAT)
 }
 
-export const isDateBetween = (date: string, startDate: string, endDate: string) =>
+const isDateBetween = (date: string, startDate: string, endDate: string) =>
   dayjs(date).isBetween(startDate, endDate, 'day', '[]')
+
+export const checkDateBooking = (checkin: string, checkout: string, booking: Booking) => {
+  return (
+    isDateBetween(checkin, booking.checkin, booking.checkout) ||
+    isDateBetween(checkout, booking.checkin, booking.checkout) ||
+    isDateBetween(booking.checkin, checkin, checkout) ||
+    isDateBetween(booking.checkout, checkin, checkout)
+  )
+}
 
 export const daysDiff = (date1: string, date2: string) => {
   const day1 = dayjs(date1, DATE_FORMAT)

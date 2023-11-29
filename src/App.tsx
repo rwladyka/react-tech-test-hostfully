@@ -4,37 +4,32 @@ import DateFilter from './components/DateFilter'
 import Places from './components/Places'
 import { Place } from './types'
 import { RootState } from './store'
-import { useState } from 'react'
+import { useMemo, useState } from 'react'
 import EditModal from './components/RegisterModal'
-import { isDateBetween } from './Utils/DateUtil'
+import { checkDateBooking } from './Utils/DateUtil'
 import Bookings from './components/Bookings'
 import { editBooking } from './slicers/bookingSlicer'
 
 function App() {
   const { bookings } = useSelector((state: RootState) => state.booking)
   const dispatch = useDispatch()
-  const [places, setPlaces] = useState(() => placesJson)
+  const [filteredDates, setFilteredDates] = useState({ checkin: '', checkout: '' })
 
   const filterAvailablePlaces = (checkin: string, checkout: string) => {
-    if (!checkin || !checkout) {
-      setPlaces(placesJson)
-      return
-    }
+    setFilteredDates({ checkin: checkin || '', checkout: checkout || '' })
+  }
 
-    const filteredPlaces = placesJson.filter(
+  const places = useMemo(() => {
+    const { checkin, checkout } = filteredDates
+    if (!checkin || !checkout) return placesJson
+
+    return placesJson.filter(
       (place) =>
         !bookings.some(
-          (booking) =>
-            booking.placeId === place.id &&
-            (isDateBetween(checkin, booking.checkin, booking.checkout) ||
-              isDateBetween(checkout, booking.checkin, booking.checkout) ||
-              isDateBetween(booking.checkin, checkin, checkout) ||
-              isDateBetween(booking.checkout, checkin, checkout)),
+          (booking) => booking.placeId === place.id && checkDateBooking(checkin, checkout, booking),
         ),
     )
-
-    setPlaces(filteredPlaces)
-  }
+  }, [bookings, filteredDates])
 
   const onSelectPlace = (place: Place) => {
     dispatch(

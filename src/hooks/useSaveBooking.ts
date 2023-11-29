@@ -3,7 +3,7 @@ import { RootState } from '../store'
 import { Booking } from '../types'
 import { addBooking, saveBooking } from '../slicers/bookingSlicer'
 import { message } from 'antd'
-import { isDateBetween } from '../Utils/DateUtil'
+import { checkDateBooking } from '../Utils/DateUtil'
 
 const useSaveBooking = () => {
   const [messageApi, contextHolder] = message.useMessage()
@@ -30,11 +30,7 @@ const useSaveBooking = () => {
     const hasDateConflict = bookings.some((booking) => {
       if (booking.id === currentBooking?.id) return false
 
-      return (
-        booking.placeId === placeId &&
-        (isDateBetween(checkin, booking.checkin!, booking.checkout!) ||
-          isDateBetween(checkout, booking.checkin!, booking.checkout!))
-      )
+      return booking.placeId === placeId && checkDateBooking(checkin, checkout, booking)
     })
 
     if (hasDateConflict) {
