@@ -1,4 +1,4 @@
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import placesJson from './assets/places.json'
 import DateFilter from './components/DateFilter'
 import Places from './components/Places'
@@ -7,9 +7,12 @@ import { RootState } from './store'
 import { useState } from 'react'
 import EditModal from './components/RegisterModal'
 import { isDateBetween } from './Utils/DateUtil'
+import Bookings from './components/Bookings'
+import { clearCurrentBooking } from './slicers/bookingSlicer'
 
 function App() {
   const { bookings } = useSelector((state: RootState) => state.booking)
+  const dispatch = useDispatch()
   const [places, setPlaces] = useState(() => placesJson)
   const [place, setPlace] = useState<Place | null>(null)
 
@@ -28,12 +31,18 @@ function App() {
     setPlaces(filteredPlaces)
   }
 
+  const closeModal = () => {
+    setPlace(null)
+    dispatch(clearCurrentBooking())
+  }
+
   return (
-    <>
+    <div style={{ maxWidth: 1240, margin: 'auto', padding: '32px 0' }}>
       <DateFilter onFilter={filterAvailablePlaces} />
       <Places places={places as Place[]} onSelect={setPlace} />
-      <EditModal place={place} onClose={() => setPlace(null)} />
-    </>
+      <EditModal place={place} onClose={closeModal} />
+      <Bookings />
+    </div>
   )
 }
 
