@@ -19,7 +19,7 @@ const Places = ({ places, onSelect }: PlacesProps) => {
       </Typography>
       <Flex gap='middle' justify='center' wrap='wrap'>
         {places.map((place) => (
-          <PlaceCard place={place} onSelect={onSelect} />
+          <PlaceCard key={place.id} place={place} onSelect={onSelect} />
         ))}
       </Flex>
     </>
