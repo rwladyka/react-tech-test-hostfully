@@ -86,7 +86,7 @@ const RegisterModal = ({ place, onClose }: RegisterModalProps) => {
             setCheckin(startDate)
             setCheckout(endDate)
           }}
-          format='MM/DD/YYYY'
+          format={DATE_FORMAT}
           allowClear
         />
       </Flex>

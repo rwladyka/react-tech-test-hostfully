@@ -1,4 +1,5 @@
 import { DatePicker, Flex } from 'antd'
+import { DATE_FORMAT } from '../../Utils/DateUtil'
 
 type DateFilterProps = {
   onFilter: (startDate: string, endDate: string) => void
@@ -11,7 +12,7 @@ const DateFilter = ({ onFilter }: DateFilterProps) => {
         placeholder={['Check in', 'Check out']}
         disabledDate={(currentDate) => currentDate.isBefore(Date.now())}
         onChange={(_, [startDate, endDate]) => onFilter(startDate, endDate)}
-        format='MM/DD/YYYY'
+        format={DATE_FORMAT}
         allowClear
       />
     </Flex>
