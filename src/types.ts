@@ -3,7 +3,7 @@ export type Place = {
   name: string
   shortDescription: string
   image: string
-  value: number
+  price: number
   city: string
 }
 
