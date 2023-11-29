@@ -5,9 +5,9 @@ import useSaveBooking from '../../hooks/useSaveBooking'
 import PlaceImage from '../PlaceImage'
 import { useSelector } from 'react-redux'
 import { RootState } from '../../store'
-import placesJson from '../../assets/places.json'
 import dayjs from 'dayjs'
 import { DATE_FORMAT } from '../../Utils/DateUtil'
+import { getPlaceById } from '../../Utils/PlacesUtil'
 
 type RegisterModalProps = {
   place: Place | null
@@ -26,7 +26,7 @@ const RegisterModal = ({ place, onClose }: RegisterModalProps) => {
   const currentPlace = useMemo(() => {
     if (!place && !currentBooking) return null
 
-    return place || (placesJson.find((json) => json.id === currentBooking?.id) as Place)
+    return place || getPlaceById(currentBooking?.id!)
   }, [place, currentBooking])
 
   useEffect(() => {
@@ -36,7 +36,7 @@ const RegisterModal = ({ place, onClose }: RegisterModalProps) => {
   }, [currentBooking])
 
   const onSave = () => {
-    if (!isAValidBooking(checkin, checkout, customerName)) return
+    if (!isAValidBooking(currentPlace?.id!, checkin, checkout, customerName)) return
 
     save({
       name: customerName,

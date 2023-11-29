@@ -4,6 +4,7 @@ import { ColumnsType } from 'antd/es/table'
 import { DeleteOutlined, EditOutlined } from '@ant-design/icons'
 import { useDispatch } from 'react-redux'
 import { deleteBooking, editBooking } from '../../slicers/bookingSlicer'
+import { getPlaceById } from '../../Utils/PlacesUtil'
 
 type BookingsTableProps = {
   bookings: Booking[]
@@ -29,6 +30,13 @@ const BookingsTable = ({ bookings }: BookingsTableProps) => {
       title: 'Name',
       dataIndex: 'name',
       key: 'name',
+    },
+    {
+      title: 'Place',
+      key: 'place',
+      render: (data) => {
+        return <>{getPlaceById(data.placeId)?.name}</>
+      },
     },
     {
       title: 'Check In',
