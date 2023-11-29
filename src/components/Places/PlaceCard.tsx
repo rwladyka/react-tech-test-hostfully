@@ -2,6 +2,7 @@ import { Card } from 'antd'
 import { Place } from '../../types'
 import Meta from 'antd/es/card/Meta'
 import PlaceImage from '../PlaceImage'
+import { formatCurrency } from '../../Utils/CurrencyUtil'
 
 type PlaceCardProps = {
   place: Place
@@ -19,11 +20,7 @@ const PlaceCard = ({ place, onSelect }: PlaceCardProps) => {
     >
       <Meta title={place.name} description={place.city} />
       <div style={{ marginTop: 12 }}>
-        <Meta
-          title={new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(
-            place.price,
-          )}
-        />
+        <Meta title={formatCurrency(place.price)} />
       </div>
     </Card>
   )
