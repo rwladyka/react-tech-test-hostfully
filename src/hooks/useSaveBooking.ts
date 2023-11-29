@@ -27,17 +27,6 @@ const useSaveBooking = () => {
       return false
     }
 
-    const hasSameName = bookings.some(
-      (booking) => booking.name === name && booking.id !== currentBooking?.id,
-    )
-
-    if (hasSameName) {
-      messageApi.error({
-        content: 'A reservation with the identical name already exists.',
-      })
-      return false
-    }
-
     const hasDateConflict = bookings.some((booking) => {
       if (booking.id === currentBooking?.id) return false
 
