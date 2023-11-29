@@ -13,7 +13,6 @@ const DateFilter = ({ onFilter }: DateFilterProps) => {
         onChange={(_, [startDate, endDate]) => onFilter(startDate, endDate)}
         format='MM/DD/YYYY'
         allowClear
-        showTime
       />
     </Flex>
   )
