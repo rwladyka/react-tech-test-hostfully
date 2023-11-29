@@ -8,13 +8,12 @@ import { useState } from 'react'
 import EditModal from './components/RegisterModal'
 import { isDateBetween } from './Utils/DateUtil'
 import Bookings from './components/Bookings'
-import { clearCurrentBooking } from './slicers/bookingSlicer'
+import { editBooking } from './slicers/bookingSlicer'
 
 function App() {
   const { bookings } = useSelector((state: RootState) => state.booking)
   const dispatch = useDispatch()
   const [places, setPlaces] = useState(() => placesJson)
-  const [place, setPlace] = useState<Place | null>(null)
 
   const filterAvailablePlaces = (checkin: string, checkout: string) => {
     const filteredPlaces = placesJson.filter(
@@ -28,19 +27,26 @@ function App() {
             isDateBetween(booking.checkout, checkin, checkout),
         ),
     )
+
     setPlaces(filteredPlaces)
   }
 
-  const closeModal = () => {
-    setPlace(null)
-    dispatch(clearCurrentBooking())
+  const onSelectPlace = (place: Place) => {
+    dispatch(
+      editBooking({
+        name: '',
+        checking: '',
+        checkout: '',
+        placeId: place.id,
+      }),
+    )
   }
 
   return (
     <div style={{ maxWidth: 1240, margin: 'auto', padding: '32px 0' }}>
       <DateFilter onFilter={filterAvailablePlaces} />
-      <Places places={places as Place[]} onSelect={setPlace} />
-      <EditModal place={place} onClose={closeModal} />
+      <Places places={places as Place[]} onSelect={onSelectPlace} />
+      <EditModal />
       <Bookings />
     </div>
   )

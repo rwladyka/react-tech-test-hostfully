@@ -1,21 +1,18 @@
 import { Button, DatePicker, Flex, Input, Modal } from 'antd'
-import { Booking, Place } from '../../types'
-import { useEffect, useMemo, useState } from 'react'
+import { Booking } from '../../types'
+import { useEffect, useState } from 'react'
 import useSaveBooking from '../../hooks/useSaveBooking'
 import PlaceImage from '../PlaceImage'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '../../store'
 import dayjs from 'dayjs'
 import { DATE_FORMAT } from '../../Utils/DateUtil'
 import { getPlaceById } from '../../Utils/PlacesUtil'
+import { clearCurrentBooking } from '../../slicers/bookingSlicer'
 
-type RegisterModalProps = {
-  place: Place | null
-  onClose: () => void
-}
-
-const RegisterModal = ({ place, onClose }: RegisterModalProps) => {
+const RegisterModal = () => {
   const { isAValidBooking, save, contextHolder } = useSaveBooking()
+  const dispatch = useDispatch()
   const { currentBooking } = useSelector((state: RootState) => state.booking) as {
     currentBooking: Booking | null
   }
@@ -23,42 +20,42 @@ const RegisterModal = ({ place, onClose }: RegisterModalProps) => {
   const [checkin, setCheckin] = useState('')
   const [checkout, setCheckout] = useState('')
 
-  const currentPlace = useMemo(() => {
-    if (!place && !currentBooking) return null
-
-    return place || getPlaceById(currentBooking?.id!)
-  }, [place, currentBooking])
+  const currentPlace = getPlaceById(currentBooking?.placeId!)
 
   useEffect(() => {
-    setCheckin(currentBooking?.checkin || '')
-    setCheckout(currentBooking?.checkout || '')
-    setCustomerName(currentBooking?.name || '')
+    setCheckin(currentBooking?.checkin!)
+    setCheckout(currentBooking?.checkout!)
+    setCustomerName(currentBooking?.name!)
   }, [currentBooking])
 
+  const closeModal = () => {
+    dispatch(clearCurrentBooking())
+  }
+
   const onSave = () => {
-    if (!isAValidBooking(currentPlace?.id!, checkin, checkout, customerName)) return
+    if (!isAValidBooking(currentBooking?.placeId!, checkin, checkout, customerName)) return
 
     save({
       name: customerName,
       checkin,
       checkout,
-      placeId: currentBooking?.placeId || place?.id!,
+      placeId: currentBooking?.placeId!,
     })
 
     setCheckin('')
     setCheckout('')
     setCustomerName('')
 
-    onClose()
+    closeModal()
   }
 
   return (
     <Modal
       title={currentPlace?.name}
-      open={!!currentPlace}
-      onCancel={onClose}
+      open={!!currentBooking}
+      onCancel={closeModal}
       footer={[
-        <Button key='back' onClick={onClose}>
+        <Button key='back' onClick={closeModal}>
           Cancel
         </Button>,
         <Button key='submit' type='primary' onClick={onSave}>
