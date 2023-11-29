@@ -14,7 +14,12 @@ const useSaveBooking = () => {
     bookings: Booking[]
   }
 
-  const isAValidBooking = (checkin: string | null, checkout: string | null, name?: string) => {
+  const isAValidBooking = (
+    placeId: number,
+    checkin: string | null,
+    checkout: string | null,
+    name?: string,
+  ) => {
     if (!name || !checkin || !checkout) {
       messageApi.error({
         content: 'The form must be completed.',
@@ -37,8 +42,9 @@ const useSaveBooking = () => {
       if (booking.id === currentBooking?.id) return false
 
       return (
-        isDateBetween(checkin, booking.checkin!, booking.checkout!) ||
-        isDateBetween(checkout, booking.checkin!, booking.checkout!)
+        booking.placeId === placeId &&
+        (isDateBetween(checkin, booking.checkin!, booking.checkout!) ||
+          isDateBetween(checkout, booking.checkin!, booking.checkout!))
       )
     })
 
