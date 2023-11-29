@@ -16,15 +16,20 @@ function App() {
   const [places, setPlaces] = useState(() => placesJson)
 
   const filterAvailablePlaces = (checkin: string, checkout: string) => {
+    if (!checkin || !checkout) {
+      setPlaces(placesJson)
+      return
+    }
+
     const filteredPlaces = placesJson.filter(
       (place) =>
         !bookings.some(
           (booking) =>
-            (booking.placeId === place.id &&
-              isDateBetween(checkin, booking.checkin, booking.checkout)) ||
-            isDateBetween(checkout, booking.checkin, booking.checkout) ||
-            isDateBetween(booking.checkin, checkin, checkout) ||
-            isDateBetween(booking.checkout, checkin, checkout),
+            booking.placeId === place.id &&
+            (isDateBetween(checkin, booking.checkin, booking.checkout) ||
+              isDateBetween(checkout, booking.checkin, booking.checkout) ||
+              isDateBetween(booking.checkin, checkin, checkout) ||
+              isDateBetween(booking.checkout, checkin, checkout)),
         ),
     )
 
