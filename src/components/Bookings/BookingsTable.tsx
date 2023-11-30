@@ -75,6 +75,7 @@ const BookingsTable = ({ bookings }: BookingsTableProps) => {
             shape='circle'
             icon={<EditOutlined />}
             onClick={() => handleEdit(data)}
+            data-testid={`edit-booking-${data.id}`}
           />
           <Popconfirm
             title={null}
@@ -84,7 +85,13 @@ const BookingsTable = ({ bookings }: BookingsTableProps) => {
             cancelText='No'
             placement='topRight'
           >
-            <Button type='primary' shape='circle' icon={<DeleteOutlined />} danger />
+            <Button
+              type='primary'
+              shape='circle'
+              icon={<DeleteOutlined />}
+              danger
+              data-testid={`delete-booking-${data.id}`}
+            />
           </Popconfirm>
         </Space>
       ),

@@ -1,12 +1,5 @@
 import { checkDateBooking, daysDiff } from './DateUtil'
-import { Booking } from '../types'
-
-const bookingMock: Booking = {
-  checkin: '01/05/2023',
-  checkout: '01/10/2023',
-  name: 'Example',
-  placeId: 1,
-}
+import { bookingMock } from '../test/mocks'
 
 describe('DateUtil', () => {
   it.each([

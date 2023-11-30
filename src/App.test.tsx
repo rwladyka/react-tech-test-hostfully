@@ -1,7 +1,7 @@
 import '@testing-library/jest-dom'
 import { screen } from '@testing-library/react'
 import App from './App'
-import { renderWithProviders } from './Utils/test-utils'
+import { renderWithProviders } from './test/test-utils'
 
 describe('initial test', () => {
   test('Renders the main page', () => {
