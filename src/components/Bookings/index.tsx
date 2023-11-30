@@ -1,4 +1,4 @@
-import Title from 'antd/es/typography/Title'
+import Title from 'antd/lib/typography/Title'
 import theme from '../../config/defaultSettings'
 import { useSelector } from 'react-redux'
 import { RootState } from '../../store'

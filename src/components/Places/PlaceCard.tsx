@@ -1,6 +1,6 @@
 import { Card } from 'antd'
 import { Place } from '../../types'
-import Meta from 'antd/es/card/Meta'
+import Meta from 'antd/lib/card/Meta'
 import PlaceImage from '../PlaceImage'
 import { formatCurrency } from '../../Utils/CurrencyUtil'
 

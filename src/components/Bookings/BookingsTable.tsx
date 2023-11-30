@@ -1,6 +1,6 @@
 import { Button, Popconfirm, Space, Table, message } from 'antd'
 import { Booking } from '../../types'
-import { ColumnsType } from 'antd/es/table'
+import { ColumnsType } from 'antd/lib/table'
 import { DeleteOutlined, EditOutlined } from '@ant-design/icons'
 import { useDispatch } from 'react-redux'
 import { deleteBooking, editBooking } from '../../slicers/bookingSlicer'
