@@ -1,10 +1,12 @@
 import '@testing-library/jest-dom'
-import { render, screen } from '@testing-library/react'
+import { screen } from '@testing-library/react'
 import App from './App'
+import { renderWithProviders } from './Utils/test-utils'
 
 describe('initial test', () => {
   test('Renders the main page', () => {
-    render(<App />)
+    renderWithProviders(<App />)
     expect(screen.getByText('Choose a Place')).toBeInTheDocument()
+    expect(screen.getByText('Bookings')).toBeInTheDocument()
   })
 })
