@@ -8,6 +8,7 @@ type PlaceImageProps = {
 
 const PlaceImage = ({ place, preview = false }: PlaceImageProps) => (
   <Image
+    data-testid='place-image'
     alt={place.shortDescription}
     src={place.image}
     style={{ maxHeight: 160 }}
