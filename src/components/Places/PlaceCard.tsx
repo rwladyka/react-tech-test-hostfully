@@ -17,6 +17,7 @@ const PlaceCard = ({ place, onSelect }: PlaceCardProps) => {
       style={{ width: 240 }}
       cover={<PlaceImage place={place} />}
       onClick={() => onSelect(place)}
+      data-testid={`place-card-${place.id}`}
     >
       <Meta title={place.name} description={place.city} />
       <div style={{ marginTop: 12 }}>
