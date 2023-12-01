@@ -9,6 +9,7 @@ const DateFilter = ({ onFilter }: DateFilterProps) => {
   return (
     <Flex justify='center' style={{ padding: '8px 0' }}>
       <DatePicker.RangePicker
+        data-testid='date-filter-range'
         placeholder={['Check in', 'Check out']}
         disabledDate={(currentDate) => currentDate.isBefore(Date.now())}
         onChange={(_, [startDate, endDate]) => onFilter(startDate, endDate)}
