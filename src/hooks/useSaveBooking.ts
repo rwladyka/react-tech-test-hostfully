@@ -14,6 +14,8 @@ const useSaveBooking = () => {
     bookings: Booking[]
   }
 
+  console.log(bookings)
+
   const isAValidBooking = (
     placeId: number,
     checkin: string | null,
