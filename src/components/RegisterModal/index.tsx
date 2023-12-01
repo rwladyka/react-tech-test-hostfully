@@ -16,6 +16,7 @@ const RegisterModal = () => {
   const { currentBooking } = useSelector((state: RootState) => state.booking) as {
     currentBooking: Booking | null
   }
+
   const [customerName, setCustomerName] = useState('')
   const [checkin, setCheckin] = useState('')
   const [checkout, setCheckout] = useState('')
@@ -69,11 +70,13 @@ const RegisterModal = () => {
           <PlaceImage place={currentPlace!} preview />
         </div>
         <Input
+          data-testid='register-modal-input-name'
           placeholder='Customer Name'
           value={customerName}
           onChange={(e) => setCustomerName(e.target.value)}
         />
         <DatePicker.RangePicker
+          data-testid='register-modal-range-dates'
           placeholder={['Check in', 'Check out']}
           disabledDate={(currentDate) => currentDate.isBefore(Date.now())}
           value={
